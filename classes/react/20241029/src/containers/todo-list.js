@@ -13,6 +13,7 @@ export default function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [mode, setMode] = useState(IDLE_MODE);
   const [tempTask, setTempTask] = useState("");
+  const [taskState, setTaskState] = useState(false);
 
   return (
     <div>
@@ -39,7 +40,7 @@ export default function TodoList() {
       )}
       <TaskList>
         {tasks.map((task) => {
-          return <TaskItem>{task}</TaskItem>;
+          return <TaskItem checkTask={() => setTaskState(!taskState)} taskState={taskState}>{task}</TaskItem>;
         })}
       </TaskList>
     </div>

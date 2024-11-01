@@ -1,0 +1,14 @@
+.task-item-container {
+  align-items: center;
+  gap: 5px;
+  display: flex;
+}
+
+.task-item {
+  list-style: none;
+}
+
+.task-item-checked {
+  list-style: none;
+  text-decoration: line-through;
+}
