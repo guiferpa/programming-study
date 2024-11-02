@@ -1,5 +1,4 @@
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
-import { MdOutlineCheckBox } from "react-icons/md";
+import { MdCheckBoxOutlineBlank, MdOutlineCheckBox } from "react-icons/md";
 import "../styles/task-item.css";
 
 export default function TaskItem({ children, checkTask, taskState }) {
