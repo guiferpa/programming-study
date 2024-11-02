@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import CreateTaskButton from "../components/create-task-button";
 import DescribeTask from "../components/describe-task";
@@ -13,7 +14,20 @@ export default function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [mode, setMode] = useState(IDLE_MODE);
   const [tempTask, setTempTask] = useState("");
-  const [taskState, setTaskState] = useState(false);
+
+  const createNewTask = (description) => {
+    return {
+      description,
+      isChecked: false,
+      id: uuidv4(),
+    }
+  }
+
+  const checkTask = (task) => {
+    const taskEdited = tasks.find(item => item.id === task.id)
+    taskEdited.isChecked = !taskEdited.isChecked;
+    setTasks([...tasks])
+  }
 
   return (
     <div>
@@ -33,14 +47,14 @@ export default function TodoList() {
       {tempTask.length > 0 && (
         <SaveTaskButton
           onClick={() => {
-            setTasks([...tasks, tempTask]);
+            setTasks([...tasks, createNewTask(tempTask)]);
             setTempTask("");
           }}
         />
       )}
       <TaskList>
         {tasks.map((task) => {
-          return <TaskItem checkTask={() => setTaskState(!taskState)} taskState={taskState}>{task}</TaskItem>;
+          return <TaskItem onCheckTask={() => checkTask(task)} task={task}>{task.description}</TaskItem>;
         })}
       </TaskList>
     </div>
